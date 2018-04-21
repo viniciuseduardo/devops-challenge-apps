@@ -17,7 +17,7 @@ Create the a Terraform script to deploy the multi-tier application with source c
 3. Solution should support docker image versioning
 5. Solution must handle instance and container failures
 6. Result of running the scripts should be two publicly available tiers: web and api
-7. We should be able to run the script against our own AWS or Azure or GCP infrastructure and be able to launch the same tiers with minimal custom configuration or install steps. Please specify the command to execute and any setup required to ensure a successful run. Again, please specify how you would expect we can access each service via curl
+7. We should be able to run the script against our own AWS (or Azure or GCP) infrastructure and be able to launch the same tiers with minimal custom configuration or install steps. Please specify the command to execute and any setup required to ensure a successful run. Again, please specify how you would expect we can access each service via curl
 
 The scripts should be delivered as a public repo on Github or a pull-request made against the <https://github.com/robsonpeixoto/devops-challenge-apps> repo
 
