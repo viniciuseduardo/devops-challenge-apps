@@ -1,9 +1,12 @@
 var express = require('express');
 var app = express();
 var uuid = require('node-uuid');
+var logger = require('morgan');
 
 var pg = require('pg');
 var conString = process.env.DB; // "postgres://username:password@localhost/database";
+
+app.use(logger('dev'));
 
 // Routes
 app.get('/api/status', function(req, res) {
