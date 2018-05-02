@@ -15,6 +15,6 @@
 ###  NOTE this app uses two env variables:
 
 - PORT: the listening PORT
-- API_HOST: the full url to call the API app
+- API_HOST: the full url to call the API app. An example `http://web-api-host:port`
 
 These two variables need to be set with docker-compose (WEB_PORT, API_HOST).
