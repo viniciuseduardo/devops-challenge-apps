@@ -1,6 +1,10 @@
 # Devops Web App
 
 
+## Observation
+
+You can ignore this `docker-compose.yml`. It's only a start point.
+
 ### install the node packages in the web container:
 ```sh
 → docker-compose run web npm install

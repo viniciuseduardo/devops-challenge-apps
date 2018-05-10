@@ -2,22 +2,51 @@
 
 This repo contains code for a multi-tier application.
 
-The application overview is as follows: `web <=> api <=> db`
+The application overview is as follows: 
+```
+                    +------------+                         +------------+
+                <=> | (web tier) | <=>                 <=> | (api tier) | <=>
+(load balancer) <=> | (web tier) | <=> (load balancer) <=> | (api tier) | <=> (db)
+                <=> | (web tier) | <=>                 <=> | (api tier) | <=>
+                    +------------+                         +------------+
+```
 
 The folders `web` and `api` respectively describe how to install and run each app.
 
-# DevOps Challenge
+## Deliverables
 
-Create the a Terraform script to deploy the multi-tier application with source code hosted at https://github.com/robsonpeixoto/devops-challenge-apps
+This challenge is divided in multiples parts(deliverables). You don't need to finish all. Show us what do you finished.
 
-## Instructions
+### Deliverable 1 - Docker
 
-1. Web and api tiers must have multiple container instances.
-2. API needs one database (PostgreSQL).
-3. Solution should support docker image versioning
-5. Solution must handle instance and container failures
-6. Result of running the scripts should be two publicly available tiers: web and api
-7. We should be able to run the script against our own AWS (or Azure or GCP) infrastructure and be able to launch the same tiers with minimal custom configuration or install steps. Please specify the command to execute and any setup required to ensure a successful run. Again, please specify how you would expect we can access each service via curl
+1. Create web `Dockerfile`
+1. Create api `Dockerfile`
+1. Define a `docker-compose.yml` in the project root that run the `web` and `api` with a simple `docker-compose up`
+1. Publish the image in a public registry with the command `docker-compose push web api`
+
+### Deliverable 2 - api and database tiers terraform script
+
+1. Create a **PostgreSQL** database with user, password and database.
+1. Create a Virtual Machine, or other solution, to run [api application](./api)
+1. Create a Load Balancer pointing to **api application**
+
+### Deliverable 3 - web tier terraform script
+
+1. Create a Virtual Machine, or other solution, to run **web application**
+1. Create the **web docker container** pointing to **api docker container**
+1. Create a Load Balancer pointing to **web application**
+
+### PLUS
+
+1. Use a container orchestrator to run the applications
+1. Solution must handle instance container failures
+1. WEB and API tiers must have multiple instances
+1. Deploy of new version without downtime
+1. WEB should access API using a Internal Load Balancer, but keep the API public
+
+## Observation
+
+Please specify all steps needed to execute and see the application working.
 
 The scripts should be delivered as a public repo on Github or a pull-request made against the <https://github.com/robsonpeixoto/devops-challenge-apps> repo
 
