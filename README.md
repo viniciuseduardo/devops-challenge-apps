@@ -2,7 +2,7 @@
 
 This repo contains code for a multi-tier application.
 
-The application overview is as follows: 
+The application overview is as follows:
 ```
                     +------------+                         +------------+
                 <=> | (web tier) | <=>                 <=> | (api tier) | <=>
@@ -19,30 +19,33 @@ This challenge is divided in multiples parts(deliverables). You don't need to fi
 
 ### Deliverable 1 - Docker
 
-1. Create web `Dockerfile`
-1. Create api `Dockerfile`
+1. Create [web](./web) `Dockerfile`
+1. Create [api](./api) `Dockerfile`
 1. Define a `docker-compose.yml` in the project root that run the `web` and `api` with a simple `docker-compose up`
 1. Publish the image in a public registry with the command `docker-compose push web api`
 
-### Deliverable 2 - api and database tiers terraform script
 
-1. Create a **PostgreSQL** database with user, password and database.
-1. Create a Virtual Machine, or other solution, to run [api application](./api)
-1. Create a Load Balancer pointing to **api application**
+### Deliverable 2 - Kubernetes cluster and PostgreSQL
 
-### Deliverable 3 - web tier terraform script
+1. Using IAC(infrastructure as code) create a Kubernetes cluster
+1. Using IAC(infrastructure as code) create a PostgreSQL database
 
-1. Create a Virtual Machine, or other solution, to run **web application**
-1. Create the **web docker container** pointing to **api docker container**
+### Deliverable 3 - api and database tiers terraform script
+
+1. Deploy [api](./api) service on cluster
+1. Configure the database credentials in a security way
+
+### Deliverable 4 - web tier terraform script
+
+1. Deploy [web](./web) service on cluster
 1. Create a Load Balancer pointing to **web application**
 
 ### PLUS
 
-1. Use a container orchestrator to run the applications
 1. Solution must handle instance container failures
 1. WEB and API tiers must have multiple instances
 1. Deploy of new version without downtime
-1. WEB should access API using a Internal Load Balancer, but keep the API public
+1. WEB should access API using a Internal Load Balancer
 
 ## Observation
 
