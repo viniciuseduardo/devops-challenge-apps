@@ -45,6 +45,11 @@ This challenge is divided in multiples parts(deliverables). You don't need to fi
 1. WEB and API tiers must have multiple instances
 1. Deploy of new version without downtime
 
+### PLUS PLUS
+
+1. Monitor the application and show in a dashboard
+1. Collect log and show in a dashboard
+
 ## Observation
 
 Please specify all steps needed to execute and see the application working.
