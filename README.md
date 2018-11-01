@@ -19,11 +19,10 @@ This challenge is divided in multiples parts(deliverables). You don't need to fi
 
 ### Deliverable 1 - Docker
 
-1. Create [web](./web) `Dockerfile`
-1. Create [api](./api) `Dockerfile`
+1. Create a clean [web](./web) `Dockerfile`
+1. Create a clean [api](./api) `Dockerfile`
 1. Define a `docker-compose.yml` in the project root that run the `web` and `api` with a simple `docker-compose up`
 1. Publish the image in a public registry with the command `docker-compose push web api`
-
 
 ### Deliverable 2 - Kubernetes cluster and PostgreSQL
 
@@ -45,11 +44,9 @@ This challenge is divided in multiples parts(deliverables). You don't need to fi
 1. Solution must handle instance container failures
 1. WEB and API tiers must have multiple instances
 1. Deploy of new version without downtime
-1. WEB should access API using a Internal Load Balancer
 
 ## Observation
 
 Please specify all steps needed to execute and see the application working.
 
-The scripts should be delivered as a public repo on Github or a pull-request made against the <https://github.com/robsonpeixoto/devops-challenge-apps> repo
-
+The scripts should be delivered as a public repo on Github or a pull-request made against the <https://github.com/robsonpeixoto/devops-challenge-apps> repo.
