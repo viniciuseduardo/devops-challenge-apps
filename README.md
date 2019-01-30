@@ -4,11 +4,11 @@ This repo contains code for a multi-tier application.
 
 The application overview is as follows:
 ```
-                    +------------+                         +------------+
-                <=> | (web tier) | <=>                 <=> | (api tier) | <=>
-(load balancer) <=> | (web tier) | <=> (load balancer) <=> | (api tier) | <=> (db)
-                <=> | (web tier) | <=>                 <=> | (api tier) | <=>
-                    +------------+                         +------------+
+                    +------------+     +------------+
+                <=> | (web tier) | <=> | (api tier) | <=>
+(load balancer) <=> | (web tier) | <=> | (api tier) | <=> (db)
+                <=> | (web tier) | <=> | (api tier) | <=>
+                    +------------+     +------------+
 ```
 
 The folders `web` and `api` respectively describe how to install and run each app.
@@ -27,7 +27,8 @@ This challenge is divided in multiples parts(deliverables). You don't need to fi
 ### Deliverable 2 - Kubernetes cluster and PostgreSQL
 
 1. Using IAC(infrastructure as code) create a Kubernetes cluster
-1. Using IAC(infrastructure as code) create a PostgreSQL database
+1. Using IAC(infrastructure as code) create a PostgreSQL server
+1. Using IAC(infrastructure as code) create a PostgreSQL database and user
 
 ### Deliverable 3 - api and database tiers terraform script
 
@@ -48,6 +49,9 @@ This challenge is divided in multiples parts(deliverables). You don't need to fi
 ### PLUS PLUS
 
 1. Monitor the application and show in a dashboard
+
+### PLUS PLUS PLUS
+
 1. Collect log and show in a dashboard
 
 ## Observation
