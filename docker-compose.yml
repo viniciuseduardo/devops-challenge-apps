@@ -1,0 +1,47 @@
+version: '3'
+services:
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - devops-challenge-data:/var/lib/postgresql/data
+    networks:
+      devops-challenge-network:
+        aliases:
+        - db
+    environment:
+      POSTGRES_DB: devops-challenge-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 102030
+  api:
+    build: ./api
+    image: viniciuseduardorj/devops-challenge-api
+    ports:
+      - "5000:5000"
+    networks:
+      devops-challenge-network:
+        aliases:
+          - api      
+    environment:
+      - PORT=5000
+      - DB=postgres://postgres:102030@db:5432/devops-challenge-db
+  web:
+    depends_on:
+      - api
+    build: ./web
+    image: viniciuseduardorj/devops-challenge-web
+    ports:
+      - "8000:8000"
+    networks:
+      devops-challenge-network:
+        aliases:
+        - web
+    environment:
+      - PORT=8000
+      - API_HOST=http://api:5000
+volumes:
+    devops-challenge-data:
+      driver: "local"
+networks:
+  devops-challenge-network:
