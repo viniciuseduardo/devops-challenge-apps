@@ -17,7 +17,7 @@ resource "google_container_cluster" "devops-challenger-k8s" {
   initial_node_count  = 1
   addons_config {
     kubernetes_dashboard { 
-      disabled = false
+      disabled = true
     }
   }  
   
