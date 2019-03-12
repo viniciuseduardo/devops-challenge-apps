@@ -13,13 +13,13 @@ variable "cluster_user_pwd" {
 }
 
 variable "cluster_node_disk_size" {
-  default = 10
+  default = 20
 }
 
 variable "cluster_node_disk_type" {
-  default = "pd-standard"
+  default = "pd-ssd"
 }
 
 variable "cluster_node_type" {
-  default = "f1-micro"
+  default = "n1-standard-1"
 }

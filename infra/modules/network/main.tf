@@ -20,16 +20,6 @@ resource "google_compute_subnetwork" "devops-challenge-subnets" {
     network         = "${google_compute_network.devops-challenge-vpc.self_link}"
 }
 
-resource "google_compute_global_address" "devops-challenge-global-address" {
-    provider = "google-beta"
-    
-    name          = "${var.vpc_network_prefix}-global-address"
-    address_type  = "INTERNAL"
-    purpose       = "VPC_PEERING"
-    network       = "${google_compute_network.devops-challenge-vpc.self_link}"
-    prefix_length = 16
-}
-
 resource "google_compute_firewall" "devops-challenge-fw-internal-rules" {
     name    = "${var.vpc_network_prefix}-fw-intenal"
     network = "${google_compute_network.devops-challenge-vpc.self_link}"

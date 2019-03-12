@@ -1,5 +1,5 @@
 resource "random_id" "db-name" {
-  byte_length = 6
+  byte_length = 4
 }
 
 resource "google_sql_database_instance" "devops-challenge-database" {
