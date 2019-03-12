@@ -1,10 +1,14 @@
 data "google_compute_regions" "available" {}
 
-variable "network_name" {
+variable "vpc_network_name" {
   type = "string"
 }
 
-variable "network_cidr_block" {
+variable "vpc_network_prefix" {
+  type = "string"
+}
+
+variable "vpc_network_cidr_block" {
   default = "10.0.0.0/16"
 }
 

@@ -1,8 +1,8 @@
 variable "database_vpc_network" {}
 
-variable "database_vpc_network_cdir"{
-  type="string"
-}
+variable "database_vpc_network_cdir" {}
+
+variable "database_vpc_private_ip" {}
 
 variable "database_server_name" {
   type = "string"

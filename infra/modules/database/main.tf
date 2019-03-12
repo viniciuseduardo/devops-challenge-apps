@@ -1,5 +1,5 @@
 resource "random_id" "db-name" {
-  byte_length = 8
+  byte_length = 6
 }
 
 resource "google_sql_database_instance" "devops-challenge-database" {
@@ -9,7 +9,7 @@ resource "google_sql_database_instance" "devops-challenge-database" {
   settings {
     tier                        = "${var.database_tier}"
     activation_policy           = "ALWAYS"
-    availability_type           = "REGIONAL"
+    availability_type           = "ZONAL"
     backup_configuration        = {
         enabled = true
     }
@@ -19,7 +19,6 @@ resource "google_sql_database_instance" "devops-challenge-database" {
         value = "0.0.0.0/0"
       }
       ipv4_enabled = "true"
-      private_network = "${var.database_vpc_network}"
     }
 
     disk_autoresize = "${var.database_disk_autoresize}"

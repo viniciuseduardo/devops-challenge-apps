@@ -1,26 +1,37 @@
+data "google_compute_zones" "available" {}
+
 locals {
-  regions_count = "${length(data.google_compute_regions.available.names)}"
+    zones = "${data.google_compute_zones.available.names}"
 }
 
 resource "google_compute_network" "devops-challenge-vpc" {
-    name                    = "${var.network_name}-vpc"
+    name                    = "${var.vpc_network_name}"
     auto_create_subnetworks = "${var.auto_create_subnetworks}"
 }
 
 resource "google_compute_subnetwork" "devops-challenge-subnets" {
     depends_on      = ["google_compute_network.devops-challenge-vpc"]
 
-    count           = "${local.regions_count}"
+    count           = "${length(local.zones)}"
 
-    name            = "${var.network_name}-subnet-${count.index}"
-    ip_cidr_range   = "${cidrsubnet(var.network_cidr_block, 8, 0 + count.index)}"
-    region          = "${data.google_compute_regions.available.names[count.index]}"
+    name            = "${var.vpc_network_prefix}-sb-${local.zones[count.index]}"
+    ip_cidr_range   = "${cidrsubnet(var.vpc_network_cidr_block, 8, 0 + count.index)}"
 
     network         = "${google_compute_network.devops-challenge-vpc.self_link}"
 }
 
+resource "google_compute_global_address" "devops-challenge-global-address" {
+    provider = "google-beta"
+    
+    name          = "${var.vpc_network_prefix}-global-address"
+    address_type  = "INTERNAL"
+    purpose       = "VPC_PEERING"
+    network       = "${google_compute_network.devops-challenge-vpc.self_link}"
+    prefix_length = 16
+}
+
 resource "google_compute_firewall" "devops-challenge-fw-internal-rules" {
-    name    = "${var.network_name}-fw-intenal"
+    name    = "${var.vpc_network_prefix}-fw-intenal"
     network = "${google_compute_network.devops-challenge-vpc.self_link}"
 
     allow {
@@ -35,11 +46,11 @@ resource "google_compute_firewall" "devops-challenge-fw-internal-rules" {
         protocol = "udp"
     }
 
-    source_ranges = ["${var.network_cidr_block}"]
+    source_ranges = ["${var.vpc_network_cidr_block}"]
 }
 
 resource "google_compute_firewall" "devops-challenge-fw-external-rules" {
-    name    = "${var.network_name}-fw-external"
+    name    = "${var.vpc_network_prefix}-fw-external"
     network = "${google_compute_network.devops-challenge-vpc.self_link}"
 
     allow {
