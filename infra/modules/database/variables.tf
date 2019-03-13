@@ -12,10 +12,6 @@ variable "database_user_name" {
   type = "string"
 }
 
-variable "database_user_pwd" {
-  type = "string"
-}
-
 variable "database_version" {
   default = "POSTGRES_9_6"
 }

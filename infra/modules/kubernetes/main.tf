@@ -2,6 +2,12 @@ data "google_client_config" "current" {}
 data "google_compute_network" "devops-challenger-k8s-network" {
   name = "${var.cluster_vpc_network}"
 }
+
+resource "random_string" "cluster-user-pwd" {
+  length  = 16
+  special = true
+}
+
 resource "google_container_cluster" "devops-challenger-k8s" {
   name        = "${var.cluster_name}"
   network     = "${var.cluster_vpc_network}" 
@@ -10,7 +16,7 @@ resource "google_container_cluster" "devops-challenger-k8s" {
 
   master_auth {
     username = "${var.cluster_user_name}"
-    password = "${var.cluster_user_pwd}"
+    password = "${random_string.cluster-user-pwd.result}"
   }
 
   remove_default_node_pool = true

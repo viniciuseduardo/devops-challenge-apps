@@ -21,7 +21,6 @@ module "devops-challenge-database" {
 
   database_server_name      = "${var.project_name}-db"
   database_user_name        = "${var.database_user_name}"
-  database_user_pwd         = "${var.database_user_pwd}"
 }
 
 module "devops-challenge-k8s" {
@@ -31,6 +30,17 @@ module "devops-challenge-k8s" {
 
   cluster_name      = "${var.project_name}-k8s"
   cluster_user_name = "${var.cluster_user_name}"
-  cluster_user_pwd  = "${var.cluster_user_pwd}"
 }
 
+provider "kubernetes" {
+  host = "https://${module.devops-challenge-k8s.cluster_endpoint}"
+
+  username = "${var.cluster_user_name}"
+  password = "${module.devops-challenge-k8s.cluster_user_pwd}"
+}
+
+module "devops-challenge-deploy-api" {
+  source = "./modules/deploy/api"
+  
+  database_connection_string = "${module.devops-challenge-database.database_connection_string}"
+}

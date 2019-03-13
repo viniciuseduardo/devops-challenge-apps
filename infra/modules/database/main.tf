@@ -2,7 +2,12 @@ resource "random_id" "db-name" {
   byte_length = 4
 }
 
-resource "google_sql_database_instance" "devops-challenge-database" {
+resource "random_string" "database-user-pwd" {
+  length  = 12
+  special = false
+}
+
+resource "google_sql_database_instance" "devops-challenge-instance" {
   name             = "${var.database_server_name}-${random_id.db-name.dec}"
   database_version = "${var.database_version}"
 
@@ -34,10 +39,18 @@ resource "google_sql_database_instance" "devops-challenge-database" {
 }
 
 resource "google_sql_user" "devops-challenge-database-user" {
-  instance   = "${google_sql_database_instance.devops-challenge-database.name}"
+  instance   = "${google_sql_database_instance.devops-challenge-instance.name}"
 
   name       = "${var.database_user_name}"
-  password   = "${var.database_user_pwd}"
+  password   = "${random_string.database-user-pwd.result}"
   
-  depends_on = ["google_sql_database_instance.devops-challenge-database"]
+  depends_on = ["google_sql_database_instance.devops-challenge-instance"]
+}
+
+resource "google_sql_database" "devops-challenge-database" {
+  instance  = "${google_sql_database_instance.devops-challenge-instance.name}"
+
+  name      = "${var.database_server_name}"
+
+  depends_on = ["google_sql_database_instance.devops-challenge-instance"]
 }
