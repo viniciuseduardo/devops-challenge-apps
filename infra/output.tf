@@ -5,5 +5,3 @@ output "cluster_endpoint" {
 output "database_connection_string" {
   value = "${module.devops-challenge-database.database_connection_string}"
 }
-
-
