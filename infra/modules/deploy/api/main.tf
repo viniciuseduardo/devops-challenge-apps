@@ -26,7 +26,7 @@ resource "kubernetes_config_map" "devops-challenge-api-config" {
   }
 
   data {
-    PORT = 8080
+    PORT     = "${var.api_port}"
   }
 }
 
@@ -68,16 +68,16 @@ resource "kubernetes_deployment" "devops-challenge-api-app" {
           }          
           resources{
             limits{
-              cpu    = "0.5"
+              cpu    = "0.1"
               memory = "128Mi"
             }
             requests{
-              cpu    = "250m"
-              memory = "32Mi"
+              cpu    = "100m"
+              memory = "16Mi"
             }
           }
           port {
-            container_port = 8080
+            container_port = "${var.api_port}"
           }
         }
       }
@@ -99,8 +99,8 @@ resource "kubernetes_service" "devops-challenge-api-service" {
     }
     session_affinity = "ClientIP"
     port {
-      port = 8080
-      target_port = 8080
+      port = "${var.api_port}"
+      target_port = "${var.api_port}"
     }
 
     type = "LoadBalancer"

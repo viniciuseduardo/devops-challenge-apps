@@ -44,3 +44,9 @@ module "devops-challenge-deploy-api" {
   
   database_connection_string = "${module.devops-challenge-database.database_connection_string}"
 }
+
+module "devops-challenge-deploy-web" {
+  source = "./modules/deploy/web"
+  
+  api_host = "${module.devops-challenge-deploy-api.api_url}"
+}
