@@ -66,6 +66,27 @@ resource "kubernetes_deployment" "devops-challenge-web-app" {
           port {
             container_port = "${var.app_port}"
           }
+
+          liveness_probe{
+            http_get {
+              path = "/" 
+              port="${var.app_port}"
+            } 
+            success_threshold = 1
+            failure_threshold = 5
+            period_seconds = 30
+            timeout_seconds = 10
+          }
+          readiness_probe{
+            http_get {
+              path = "/" 
+              port="${var.app_port}"
+            } 
+            success_threshold = 1
+            failure_threshold = 5
+            period_seconds = 30
+            timeout_seconds = 10
+          }          
         }
       }
     }

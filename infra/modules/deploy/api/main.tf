@@ -79,6 +79,26 @@ resource "kubernetes_deployment" "devops-challenge-api-app" {
           port {
             container_port = "${var.api_port}"
           }
+          liveness_probe{
+            http_get {
+              path = "/api/status" 
+              port = "${var.api_port}"
+            } 
+            success_threshold = 1
+            failure_threshold = 5
+            period_seconds = 30
+            timeout_seconds = 10
+          }
+          readiness_probe{
+            http_get {
+              path = "/api/status" 
+              port = "${var.api_port}"
+            } 
+            success_threshold = 1
+            failure_threshold = 5
+            period_seconds = 30
+            timeout_seconds = 10
+          }          
         }
       }
     }
